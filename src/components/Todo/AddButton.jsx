@@ -8,7 +8,7 @@ export default class AddButton extends React.PureComponent {
     const { createTask } = this.context;
     return (
       <button onClick={() => createTask()}>
-        new!
+        ➕
       </button>
     );
   }

@@ -29,7 +29,7 @@ export class TodoApp extends React.PureComponent {
   }
   renderTasks() {
     const { state } = this.props;
-    return state.tasks.valueSeq().map(
+    return state.getIncompleteTasks().map(
       task => {
         if (task.id === state.inputTarget) {
           return <TaskFrom key={task.id} task={task} />
@@ -38,10 +38,17 @@ export class TodoApp extends React.PureComponent {
       }
     );
   }
+  renderCompletedTasks() {
+    const { state } = this.props;
+    return state.getCompleteTasks().map(
+      task => <TaskItem key={task.id} task={task} />
+    );
+  }
   render() {
     return(
       <div>
         <AddButton />
+        <h2>current tasks</h2>
         <table>
           <thead>
             <tr>
@@ -53,6 +60,20 @@ export class TodoApp extends React.PureComponent {
           </thead>
           <tbody>
             { this.renderTasks() }
+          </tbody>
+        </table>
+        <h2>complete tasks</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>name</th>
+              <th>deadline</th>
+              <th />
+            </tr>
+          </thead>
+          <tbody>
+            { this.renderCompletedTasks() }
           </tbody>
         </table>
       </div>

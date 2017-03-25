@@ -16,6 +16,7 @@ export default class TodoState extends TodoStateRecord {
     ),
     inputTarget: PropTypes.number,
   })
+  // actions
   update({id, name, deadline}) {
     const targetTask = this.tasks.get(id).setName(name).setDeadline(deadline);
     return this.set('tasks', this.tasks.set(id, targetTask));
@@ -36,10 +37,17 @@ export default class TodoState extends TodoStateRecord {
   changeInputTarget(id) {
     return this.set('inputTarget', id);
   }
+  // convenience methods
   getLatestId() {
     if (this.tasks.count() === 0) {
       return 0;
     }
     return this.tasks.keySeq().max();
+  }
+  getIncompleteTasks() {
+    return this.tasks.filter(task => !task.checked).valueSeq();
+  }
+  getCompleteTasks() {
+    return this.tasks.filter(task => task.checked).valueSeq();
   }
 }

@@ -7,15 +7,25 @@ export default class TaskItem extends React.PureComponent {
   }
   static contextTypes = {
     changeInputTarget: PropTypes.func,
+    checkTask: PropTypes.func,
   }
+  renderCheckButton() {
+    const { task } = this.props;
+    const { checkTask } = this.context;
+    return <button onClick={() => checkTask(task.id)}>✅</button>
+  }
+
   render() {
     const { task } = this.props;
-    const { changeInputTarget } = this.context;
+    const { changeInputTarget, checkTask } = this.context;
     return (
       <tr onClick={() => changeInputTarget(task.id)}>
         <td>{task.id}</td>
         <td>{task.name}</td>
         <td>{task.deadline}</td>
+        <td>
+          { task.checked ? "✅" : this.renderCheckButton() }
+        </td>
       </tr>
     );
   }
