@@ -17,7 +17,7 @@ export default class TaskItem extends React.PureComponent {
 
   render() {
     const { task } = this.props;
-    const { changeInputTarget, checkTask } = this.context;
+    const { changeInputTarget } = this.context;
     return (
       <tr onClick={() => changeInputTarget(task.id)}>
         <td>{task.id}</td>
