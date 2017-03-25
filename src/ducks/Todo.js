@@ -1,4 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
+import { takeEvery } from 'redux-saga';
+import { call, put } from 'redux-saga/effects';
 import { TodoState } from '../models';
 
 const CREATE_TASK = 'CREATE_TASK';
@@ -22,3 +24,9 @@ export const actions = {
   submitTask: createAction(SUBMIT_TASK),
   changeInputTarget: createAction(CHANGE_INPUT),
 };
+function* submitTask(action) {
+}
+
+export function* todoSaga() {
+  yield* takeEvery(SUBMIT_TASK, submitTask);
+}

@@ -1,11 +1,15 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 import { TodoState } from '../models';
-import todoReducer from '../ducks/Todo.js';
+import todoReducer, { todoSaga } from '../ducks/Todo.js';
 
 export default () => {
   const initialState = { $$todoState: new TodoState() };
   const combinedReducer = combineReducers({
     $$todoState: todoReducer,
   });
-  return createStore(combinedReducer, initialState);
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(combinedReducer, initialState, applyMiddleware(sagaMiddleware));
+  sagaMiddleware.run(todoSaga);
+  return store;
 }
