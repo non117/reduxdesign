@@ -31,4 +31,8 @@ export default class Task extends TaskRecord {
   isLate() {
     return this.deadline < Date.now();
   }
+  submit() {
+    // FIXME http request
+    return this.toJS();
+  }
 }

@@ -30,12 +30,15 @@ export default class TodoState extends TodoStateRecord {
     const targetTask = this.tasks.get(id).check();
     return this.set('tasks', this.tasks.set(id, targetTask));
   }
-  submit(id) {
-    // FIXME commit
+  submit() {
     return this.changeInputTarget(undefined);
   }
   changeInputTarget(id) {
     return this.set('inputTarget', id);
+  }
+  applyTaskResponse(object) {
+    const newTask = new Task(object);
+    return this.set('tasks', this.tasks.set(object.id, newTask));
   }
   // convenience methods
   getLatestId() {

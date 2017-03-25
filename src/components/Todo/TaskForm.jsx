@@ -21,7 +21,7 @@ export default class TaskForm extends React.PureComponent {
         </td>
         <td>{task.deadline}</td>
         <td>
-          <button onClick={() => submitTask(task.id)}>
+          <button onClick={() => submitTask(task)}>
             👊
           </button>
         </td>
