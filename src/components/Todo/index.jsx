@@ -47,7 +47,6 @@ export class TodoApp extends React.PureComponent {
   render() {
     return(
       <div>
-        <AddButton />
         <h2>current tasks</h2>
         <table>
           <thead>
@@ -62,6 +61,7 @@ export class TodoApp extends React.PureComponent {
             { this.renderTasks() }
           </tbody>
         </table>
+        <AddButton />
         <h2>complete tasks</h2>
         <table>
           <thead>
