@@ -7,12 +7,12 @@ export default class TaskForm extends React.PureComponent {
     task: Task.PropTypes.isRequired,
   }
   static contextTypes = {
-    toggleInputMode: PropTypes.func,
+    submitTask: PropTypes.func,
     updateTask: PropTypes.func,
   }
   render() {
     const { task } = this.props;
-    const { toggleInputMode, updateTask } = this.context;
+    const { submitTask, updateTask } = this.context;
     return (
       <tr>
         <td>{task.id}</td>
@@ -21,7 +21,7 @@ export default class TaskForm extends React.PureComponent {
         </td>
         <td>{task.deadline}</td>
         <td>
-          <button onClick={() => toggleInputMode(task.id)}>
+          <button onClick={() => submitTask(task.id)}>
             done!
           </button>
         </td>

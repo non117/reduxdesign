@@ -5,6 +5,7 @@ import Task from './Task';
 
 const TodoStateRecord = new Record({
   tasks: new OrderedMap(),
+  inputTarget: undefined,
 });
 
 export default class TodoState extends TodoStateRecord {
@@ -13,6 +14,7 @@ export default class TodoState extends TodoStateRecord {
       Task.PropTypes.isRequired,
       mapContains(PropTypes.number.isRequired)
     ),
+    inputTarget: PropTypes.number,
   })
   update({id, name, deadline}) {
     const targetTask = this.tasks.get(id).setName(name).setDeadline(deadline);
@@ -21,15 +23,18 @@ export default class TodoState extends TodoStateRecord {
   create() {
     const id = this.getLatestId() + 1;
     const newTask = new Task({ id });
-    return this.set('tasks', this.tasks.set(id, newTask))
+    return this.set('tasks', this.tasks.set(id, newTask)).changeInputTarget(id);
   }
   check(id) {
     const targetTask = this.tasks.get(id).check();
     return this.set('tasks', this.tasks.set(id, targetTask));
   }
-  toggleInputMode(id) {
-    const targetTask = this.tasks.get(id).toggleInputMode();
-    return this.set('tasks', this.tasks.set(id, targetTask));
+  submit(id) {
+    // FIXME commit
+    return this.changeInputTarget(undefined);
+  }
+  changeInputTarget(id) {
+    return this.set('inputTarget', id);
   }
   getLatestId() {
     if (this.tasks.count() === 0) {

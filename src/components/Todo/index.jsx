@@ -13,13 +13,15 @@ export class TodoApp extends React.PureComponent {
     createTask: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
     checkTask: PropTypes.func.isRequired,
-    toggleInputMode: PropTypes.func.isRequired,
+    submitTask: PropTypes.func.isRequired,
+    changeInputTarget: PropTypes.func.isRequired,
   }
   static childContextTypes = {
     createTask: PropTypes.func,
     updateTask: PropTypes.func,
     checkTask: PropTypes.func,
-    toggleInputMode: PropTypes.func,
+    submitTask: PropTypes.func,
+    changeInputTarget: PropTypes.func,
   }
   getChildContext() {
     const { state, ...actions } = this.props;
@@ -29,7 +31,7 @@ export class TodoApp extends React.PureComponent {
     const { state } = this.props;
     return state.tasks.valueSeq().map(
       task => {
-        if (task.inputMode) {
+        if (task.id === state.inputTarget) {
           return <TaskFrom key={task.id} task={task} />
         }
         return <TaskItem key={task.id} task={task} />

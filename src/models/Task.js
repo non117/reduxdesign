@@ -7,7 +7,6 @@ const TaskRecord = new Record({
   name: '',
   deadline: undefined,
   checked: false,
-  inputMode: false,
 });
 
 export default class Task extends TaskRecord {
@@ -16,7 +15,6 @@ export default class Task extends TaskRecord {
     name: PropTypes.string,
     deadline: PropTypes.string,
     checked: PropTypes.bool,
-    inputMode: PropTypes.bool,
   })
   setName(name) {
     return this.set('name', name);
@@ -32,8 +30,5 @@ export default class Task extends TaskRecord {
   }
   isLate() {
     return this.deadline < Date.now();
-  }
-  toggleInputMode() {
-    return this.set('inputMode', !this.inputMode);
   }
 }

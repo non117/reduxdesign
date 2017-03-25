@@ -6,13 +6,13 @@ export default class TaskItem extends React.PureComponent {
     task: Task.PropTypes.isRequired,
   }
   static contextTypes = {
-    toggleInputMode: PropTypes.func,
+    changeInputTarget: PropTypes.func,
   }
   render() {
     const { task } = this.props;
-    const { toggleInputMode } = this.context;
+    const { changeInputTarget } = this.context;
     return (
-      <tr onClick={() => toggleInputMode(task.id)}>
+      <tr onClick={() => changeInputTarget(task.id)}>
         <td>{task.id}</td>
         <td>{task.name}</td>
         <td>{task.deadline}</td>
