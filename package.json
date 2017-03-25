@@ -23,6 +23,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
