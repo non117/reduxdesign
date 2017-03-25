@@ -17,7 +17,7 @@ export default class TaskForm extends React.PureComponent {
       <tr>
         <td>{task.id}</td>
         <td>
-          <input type="text" value={this.name} onChange={(e) => updateTask({ id: task.id, name: e.target.value})} />
+          <input type="text" value={task.name} onChange={(e) => updateTask({ id: task.id, name: e.target.value})} />
         </td>
         <td>{task.deadline}</td>
         <td>
