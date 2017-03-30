@@ -18,17 +18,14 @@ export default class TodoState extends TodoStateRecord {
   })
   // actions
   update({id, name, deadline}) {
-    const targetTask = this.tasks.get(id).setName(name).setDeadline(deadline);
-    return this.set('tasks', this.tasks.set(id, targetTask));
+    return this.updateIn(['tasks', id], task => task.setName(name).setDeadline(deadline));
   }
   create() {
     const id = this.getLatestId() + 1;
-    const newTask = new Task({ id });
-    return this.set('tasks', this.tasks.set(id, newTask)).changeInputTarget(id);
+    return this.setIn(['tasks', id], new Task({ id })).changeInputTarget(id);
   }
   check(id) {
-    const targetTask = this.tasks.get(id).check();
-    return this.set('tasks', this.tasks.set(id, targetTask));
+    return this.updateIn(['tasks', id], task => task.check());
   }
   submit() {
     return this.changeInputTarget(undefined);
@@ -37,8 +34,7 @@ export default class TodoState extends TodoStateRecord {
     return this.set('inputTarget', id);
   }
   applyTaskResponse(object) {
-    const newTask = new Task(object);
-    return this.set('tasks', this.tasks.set(object.id, newTask));
+    return this.setIn(['tasks', object.id], new Task(object));
   }
   // convenience methods
   getLatestId() {
